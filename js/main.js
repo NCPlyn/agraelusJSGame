@@ -5,6 +5,11 @@ let life1 = document.getElementById("1");
 let life2 = document.getElementById("2");
 let life3 = document.getElementById("3");
 let ss = document.getElementById("s");
+let ne = new Audio('sound/ne.mp3');
+let rip = new Audio('sound/rip.mp3');
+let pew = new Audio('sound/pew.mp3');
+let checksound = document.getElementById("sound");
+let darktheme = document.getElementById("theme");
 let enemyspeed = 3 //global speed for enemies
 
 class Enemy { //protivník
@@ -69,6 +74,7 @@ let player = { //hráč
     if (this.keys['Space']) { //střelba a detekce
       game.enemies.forEach(function(obj, index) {
         if (player.y + 62 > obj.y && player.y + 62 < (obj.y + 50) && player.x > obj.x && player.shot == 0) {
+          if(checksound.checked == true) { pew.cloneNode(true).play(); };
           ctx.fillStyle = "orange";
           ctx.fillRect(0, player.y + 60, player.x + 5, 4);
           player.shot = 1;
@@ -115,8 +121,9 @@ let game = {
     player.move(); //vyvolání funkce pro pohyb hráče
     player.paint(); //vyvolání funkce pro výkres
 
-    this.enemies.forEach(function(obj, index) { //detekce projití nepřátel
+    this.enemies.forEach(function(obj, index) { //detekce projití nepřátel, game over, zvuk
       if (obj.x > 1350) {
+        if(checksound.checked == true) { ne.cloneNode(true).play(); };
         obj.set();
         game.lifes--;
         ctx.fillStyle = "darkred";
@@ -126,6 +133,7 @@ let game = {
         } else if (game.lifes == 1) {
           life2.src='img/badlife.png';
         } else if (game.lifes == 0) {
+          if(checksound.checked == true) { rip.play(); }
           life3.src='img/badlife.png';
           clearInterval(timer);
           ctx.fillStyle = "darkred";
@@ -159,9 +167,17 @@ document.body.addEventListener("keyup", function(event) { //pro ovládání (pu�
   shotproblem.unshot();
 });
 
+darktheme.addEventListener('change', function() { //dark theme
+  if (this.checked) {
+    document.body.style.backgroundColor = "#282C34";
+    document.body.style.color = "white";
+  } else {
+    document.body.style.backgroundColor = "white";
+    document.body.style.color = "black";
+  }
+});
+
 game.play(); //Start hry
 
-game.addEnemy();
-setTimeout(function() {
-  game.addEnemy();
-}, 5000);
+game.addEnemy(); //přídání dvou nepřátel, druhý po 5s
+setTimeout(function() { game.addEnemy(); }, 5000);

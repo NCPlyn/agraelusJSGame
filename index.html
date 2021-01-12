@@ -8,12 +8,10 @@
 </head>
 
 <body>
-
-
+<embed src="sound/rip.mp3" autostart=false width=1 height=1 id="pew" enablejavascript="true">
   <main>
     <div>
       <img id="agrgun" src="img/agrgun.png" alt="player" style="visibility: hidden;">
-
       <div class="container">
         <div class="row">
           <div class="col-sm my-auto">
@@ -26,7 +24,13 @@
           </div>
         </div>
       </div>
-      <canvas width="1500" height="600" class="border"></canvas>
+      <canvas width="1500" height="600" class="border"></canvas><br>
+      <div class="text-center">
+        <input type="checkbox" id="sound" name="sound">
+        <label for="sound" style="margin-right:50px">Sound effects? (swearing)</label>
+        <input type="checkbox" id="theme" name="theme">
+        <label for="theme">Dark Theme?</label>
+      </div>
     </div>
   </main>
 
