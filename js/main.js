@@ -1,6 +1,10 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 let agrgun = document.getElementById("agrgun");
+let life1 = document.getElementById("1");
+let life2 = document.getElementById("2");
+let life3 = document.getElementById("3");
+let ss = document.getElementById("s");
 let enemyspeed = 3 //global speed for enemies
 
 class Enemy { //protivník
@@ -68,6 +72,7 @@ let player = { //hráč
           ctx.fillStyle = "orange";
           ctx.fillRect(0, player.y + 60, player.x + 5, 4);
           player.shot = 1;
+          game.doScore();
           obj.set();
         }
       });
@@ -76,8 +81,14 @@ let player = { //hráč
 }
 
 let game = {
+  score: 0,
   enemies: [],
-  lives: 3,
+  lifes: 3, //0 - neomezeně, jiné fungují ale obrázky budou fungovat jenom při 3
+
+  doScore: function() {
+    this.score++;
+    ss.innerHTML = this.score;
+  },
 
   addEnemy: function() { //přídávání nepřátel
     game.enemies.push(new Enemy());
@@ -96,22 +107,32 @@ let game = {
     ctx.fillStyle = "blue";
     ctx.fillRect(1300, 0, 1500, 600); //obranné pole
 
-    player.move(); //vyvolání funkce pro pohyb hráče
-    player.paint(); //vyvolání funkce pro výkres
-
     this.enemies.forEach(function(obj, index) { //pohyb a vykreslení nepřátel
       obj.move();
       obj.paint();
     });
 
+    player.move(); //vyvolání funkce pro pohyb hráče
+    player.paint(); //vyvolání funkce pro výkres
+
     this.enemies.forEach(function(obj, index) { //detekce projití nepřátel
       if (obj.x > 1350) {
-        game.lives--;
-        if (game.lives == 0) {
+        obj.set();
+        game.lifes--;
+        ctx.fillStyle = "darkred";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if(game.lifes == 2) {
+          life1.src='img/badlife.png';
+        } else if (game.lifes == 1) {
+          life2.src='img/badlife.png';
+        } else if (game.lifes == 0) {
+          life3.src='img/badlife.png';
           clearInterval(timer);
-          alert("reee");
-        } else {
-          obj.set();
+          ctx.fillStyle = "darkred";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "black";
+          ctx.font = "128px Arial";
+          ctx.fillText("Game Over", 400, 330);
         }
       }
     });

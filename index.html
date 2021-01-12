@@ -1,7 +1,47 @@
-<html>
-<main>
-<img id="agrgun" src="img/agrgun.png" alt="player">
-<canvas width="1500" height="600" class="border" style="border:1px solid red"></canvas>
-</main>
-<script src="js/main.js"></script>
+<html lang="cs">
+
+<head>
+  <title>AgrGame</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+  <main>
+    <div>
+      <img id="agrgun" src="img/agrgun.png" alt="player" style="visibility: hidden;">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm my-auto">
+            <p id="s" style="font-weight:bold;font-size:50px">0</p>
+          </div>
+          <div class="col-sm text-center">
+            <img id="1" src="img/goodlife.png" alt="">
+            <img id="2" src="img/goodlife.png" alt="">
+            <img id="3" src="img/goodlife.png" alt="">
+          </div>
+        </div>
+      </div>
+      <canvas width="1500" height="600" class="border"></canvas>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+</body>
+
 </html>
+
+<style>
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    width: 1500px;
+    height: 600px;
+}
+</style>
