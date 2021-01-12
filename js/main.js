@@ -1,29 +1,29 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
-let enemyspeed = 3
+let agrgun = document.getElementById("agrgun");
+let enemyspeed = 3 //global speed for enemies
 
+class Enemy { //protivník
+	x = -100;
+	y = Math.floor(Math.random()*(canvas.height - 100))+50;
 
-class enemy {
-	x = 0;
-	y = 0;
-
-	set() {
-		this.y = Math.floor(Math.random() * (canvas.height - 50));
-		this.x = 0;
+	set() { //obnovení na začátek
+		this.y = Math.floor(Math.random()*(canvas.height - 100))+50;
+		this.x = -100;
 	}
 
-	move() {
+	move() { //pohyb doprava
 		this.x += enemyspeed;
 	}
 
-	paint() {
+	paint() { //nakreslení do canvasu
 		ctx.fillStyle = "red";
         ctx.fillRect(this.x,this.y,50,50);
 	}
 }
 
-let player = {
-    x: 1000,
+let player = { //hráč
+    x: 1200,
     y: 300,
 	speed: 5,
 	velY: 0,
@@ -31,7 +31,6 @@ let player = {
 	keys: [],
 	shot: 0,
 
-    /* paint() - vykreslení kříže na plátno */
     paint: function() {
 
 		if (this.keys['ArrowUp']) {
@@ -49,8 +48,8 @@ let player = {
 		this.velY *= this.friction;
         this.y += this.velY;
 
-        if (this.y > canvas.height - 50) {
-            this.y = canvas.height - 50;
+        if (this.y > canvas.height - 90) {
+            this.y = canvas.height - 90;
             this.velY = -this.velY;
         }
 
@@ -58,12 +57,13 @@ let player = {
             this.y = 0;
             this.velY = -this.velY;
         }
+
 		ctx.fillStyle = "lightgrey";
-		ctx.fillRect(0,this.y+5,this.x,40);
+		ctx.fillRect(0,this.y+60,this.x+5,4);
 
 		if (this.keys['Space']) {
 			game.enemies.forEach(function(obj, index) {
-				if(player.y+25 > obj.y && player.y+25 < (obj.y+50) && player.x > obj.x && player.shot == 0) {
+				if(player.y+62 > obj.y && player.y+62 < (obj.y+50) && player.x > obj.x && player.shot == 0) {
 					ctx.fillStyle = "orange";
 					ctx.fillRect(0,this.y+5,this.x,40);
 					player.shot = 1;
@@ -74,7 +74,8 @@ let player = {
         }
 
         ctx.fillStyle = "green";
-        ctx.fillRect(this.x,this.y,50,50);
+
+		ctx.drawImage(agrgun, this.x, this.y);
 
     }
 }
@@ -84,7 +85,7 @@ let game = {
 	enemies: [],
 
 	addEnemy: function() {
-        game.enemies.push(new enemy());
+        game.enemies.push(new Enemy());
     },
 
 
@@ -103,7 +104,7 @@ let game = {
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
 		ctx.fillStyle = "blue";
-        ctx.fillRect(1200,0,1500,600);
+        ctx.fillRect(1300,0,1500,600);
 
 		this.enemies.forEach(function(obj, index) {
             obj.move();
@@ -113,7 +114,7 @@ let game = {
 		player.paint();
 
 		this.enemies.forEach(function(obj, index) {
-            if(obj.x > 1200) {
+            if(obj.x > 1350) {
 				game.lives--;
 				if(game.lives == 0) {
 					clearInterval(timer);
@@ -129,7 +130,7 @@ let game = {
     },
 }
 
-let shotproblem = {
+let shotproblem = { //hnusná záplata proti střílení když držíte mezerník, která funguje jenom z poloviny
 	keys: [],
 	unshot: function() {
 		if (this.keys['Space']) {
@@ -138,15 +139,18 @@ let shotproblem = {
 	}
 }
 
-document.body.addEventListener('keydown', function(event) {
+document.body.addEventListener('keydown', function(event) { //pro ovládání (stisk)
     player.keys[event.code] = true;
 	shotproblem.keys[event.code] = false;
 });
-document.body.addEventListener("keyup", function(event) {
+
+document.body.addEventListener("keyup", function(event) { //pro ovládání (puštění)
     player.keys[event.code] = false;
 	shotproblem.keys[event.code] = true;
 	shotproblem.unshot();
 });
-game.play();
+
+game.play(); //Start hry
+
 game.addEnemy();
 setTimeout(function() { game.addEnemy(); }, 5000);
