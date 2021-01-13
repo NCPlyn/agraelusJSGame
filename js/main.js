@@ -17,6 +17,7 @@ let pew = new Audio('sound/pew.mp3');
 let checksound = document.getElementById("sound");
 let darktheme = document.getElementById("theme");
 let enemyspeed = 3 //global speed for enemies
+let gameRunning = false;
 
 ctx.fillStyle = "black";
 ctx.font = "128px Arial";
@@ -112,10 +113,8 @@ let game = {
   },
 
   play: function() { //animace hry a zrycholání nepřátel
-    timer = setInterval(function() {
-      game.repaint();
-      enemyspeed += 0.001;
-    }, 20);
+    gameRunning = true;
+    requestAnimationFrame(animate);
   },
 
   reset: function() {
@@ -161,8 +160,8 @@ let game = {
           life2.src='img/badlife.png';
         } else if (game.lifes == 0) {
           if(checksound.checked == true) { rip.play(); }
+          gameRunning = false;
           life3.src='img/badlife.png';
-          clearInterval(timer);
           ctx.fillStyle = "darkred";
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           ctx.fillStyle = "black";
@@ -171,6 +170,14 @@ let game = {
         }
       }
     });
+  }
+}
+
+function animate() {
+  game.repaint();
+  if(gameRunning) {
+    requestAnimationFrame(animate);
+    enemyspeed += 0.001;
   }
 }
 

@@ -29,13 +29,13 @@
       </div>
       <canvas width="1500" height="600" class="border"></canvas><br>
       <div class="text-center">
-        <button style="margin-right:50px" onclick="game.play();">Play</button>
-        <button style="margin-right:50px" onclick="game.reset();">Reset</button>
-        <button style="margin-right:50px" onclick="game.addEnemy();">Add enemy</button>
+        <button class="mrgn" onclick="game.play();">Play</button>
+        <button class="mrgn" onclick="game.reset();">Reset</button>
+        <button class="mrgn" onclick="game.addEnemy();">Add enemy</button>
         <input type="checkbox" id="sound" name="sound">
-        <label for="sound" style="margin-right:50px">Sound effects? (swearing)</label>
+        <label for="sound" class="mrgn">Sound effects? (swearing)</label>
         <input type="checkbox" id="theme" name="theme">
-        <label for="theme" style="margin-right:50px">Dark Theme?</label>
+        <label for="theme" class="mrgn">Dark Theme?</label>
 		    <b>Up & Down arrows</b> - move || <b>Space</b> - shoot
       </div>
     </div>
@@ -55,5 +55,8 @@ canvas {
     display: block;
     width: 1500px;
     height: 600px;
+}
+.mrgn {
+  margin-right:50px;
 }
 </style>
