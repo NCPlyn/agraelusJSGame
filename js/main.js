@@ -129,6 +129,7 @@ let game = {
     this.enemies.forEach(function(obj, index) {
       obj.set();
     });
+    game.play();
   },
 
   repaint: function() {
