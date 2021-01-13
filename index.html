@@ -10,7 +10,7 @@
 <body>
   <main>
     <div>
-      <img id="agrgun" src="img/agrgun.png" alt="player" style="visibility: hidden;">
+    <img id="agrgun" src="img/agrgun.png" alt="player" style="visibility: hidden;">
 	  <img id="enemy1" src="img/enemy1.png" alt="enemy" style="visibility: hidden;">
 	  <img id="enemy2" src="img/enemy2.png" alt="enemy" style="visibility: hidden;">
 	  <img id="enemy3" src="img/enemy3.png" alt="enemy" style="visibility: hidden;">
@@ -29,11 +29,14 @@
       </div>
       <canvas width="1500" height="600" class="border"></canvas><br>
       <div class="text-center">
+        <button style="margin-right:50px" onclick="game.play();">Play</button>
+        <button style="margin-right:50px" onclick="game.reset();">Reset</button>
+        <button style="margin-right:50px" onclick="game.addEnemy();">Add enemy</button>
         <input type="checkbox" id="sound" name="sound">
         <label for="sound" style="margin-right:50px">Sound effects? (swearing)</label>
         <input type="checkbox" id="theme" name="theme">
         <label for="theme" style="margin-right:50px">Dark Theme?</label>
-		<b>Up & Down arrows</b> - move || <b>Space</b> - shoot
+		    <b>Up & Down arrows</b> - move || <b>Space</b> - shoot
       </div>
     </div>
 	<img id="multipla" src="img/multipla.png" alt="multipla" style="visibility: hidden;">

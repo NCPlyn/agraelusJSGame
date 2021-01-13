@@ -114,6 +114,19 @@ let game = {
     }, 20);
   },
 
+  reset: function() {
+    enemyspeed = 3;
+    this.lifes = 3;
+    this.score = -1;
+    game.doScore();
+    life1.src='img/goodlife.png';
+    life2.src='img/goodlife.png';
+    life3.src='img/goodlife.png';
+    this.enemies.forEach(function(obj, index) {
+      obj.set();
+    });
+  },
+
   repaint: function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -186,8 +199,6 @@ darktheme.addEventListener('change', function() { //dark theme
     document.body.style.color = "black";
   }
 });
-
-game.play(); //Start hry
 
 game.addEnemy(); //přídání dvou nepřátel, druhý po 5s
 setTimeout(function() { game.addEnemy(); }, 5000);
