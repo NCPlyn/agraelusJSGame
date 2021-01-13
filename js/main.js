@@ -16,6 +16,7 @@ let rip = new Audio('sound/rip.mp3');
 let pew = new Audio('sound/pew.mp3');
 let checksound = document.getElementById("sound");
 let darktheme = document.getElementById("theme");
+let nodead = document.getElementById("nodead");
 let enemyspeed = 3 //global speed for enemies
 let gameRunning = false;
 
@@ -211,6 +212,15 @@ darktheme.addEventListener('change', function() { //dark theme
   } else {
     document.body.style.backgroundColor = "white";
     document.body.style.color = "black";
+  }
+});
+
+nodead.addEventListener('change', function() { //dark theme
+  if (this.checked) {
+    game.lifes = -1;
+    ss.style.color = "red";
+  } else {
+    game.lifes = 3;
   }
 });
 
