@@ -8,10 +8,13 @@
 </head>
 
 <body>
-<embed src="sound/rip.mp3" autostart=false width=1 height=1 id="pew" enablejavascript="true">
   <main>
     <div>
       <img id="agrgun" src="img/agrgun.png" alt="player" style="visibility: hidden;">
+	  <img id="enemy1" src="img/enemy1.png" alt="enemy" style="visibility: hidden;">
+	  <img id="enemy2" src="img/enemy2.png" alt="enemy" style="visibility: hidden;">
+	  <img id="enemy3" src="img/enemy3.png" alt="enemy" style="visibility: hidden;">
+	  <img id="enemy4" src="img/enemy4.png" alt="enemy" style="visibility: hidden;">
       <div class="container">
         <div class="row">
           <div class="col-sm my-auto">
@@ -29,9 +32,11 @@
         <input type="checkbox" id="sound" name="sound">
         <label for="sound" style="margin-right:50px">Sound effects? (swearing)</label>
         <input type="checkbox" id="theme" name="theme">
-        <label for="theme">Dark Theme?</label>
+        <label for="theme" style="margin-right:50px">Dark Theme?</label>
+		<b>Up & Down arrows</b> - move || <b>Space</b> - shoot
       </div>
     </div>
+	<img id="multipla" src="img/multipla.png" alt="multipla" style="visibility: hidden;">
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

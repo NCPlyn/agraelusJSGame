@@ -1,9 +1,15 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+let enemy1 = document.getElementById("enemy1");
+let enemy2 = document.getElementById("enemy2");
+let enemy3 = document.getElementById("enemy3");
+let enemy4 = document.getElementById("enemy4");
+const obrz = [enemy1,enemy2,enemy3,enemy4];
 let agrgun = document.getElementById("agrgun");
 let life1 = document.getElementById("1");
 let life2 = document.getElementById("2");
 let life3 = document.getElementById("3");
+let multipla = document.getElementById("multipla");
 let ss = document.getElementById("s");
 let ne = new Audio('sound/ne.mp3');
 let rip = new Audio('sound/rip.mp3');
@@ -15,10 +21,12 @@ let enemyspeed = 3 //global speed for enemies
 class Enemy { //protivník
   x = -100;
   y = Math.floor(Math.random() * (canvas.height - 100)) + 50;
+  enimage = Math.floor(Math.random() * obrz.length);
 
   set() { //obnovení na začátek
     this.y = Math.floor(Math.random() * (canvas.height - 100)) + 50;
     this.x = -100;
+    this.enimage = Math.floor(Math.random() * obrz.length);
   }
 
   move() { //pohyb doprava
@@ -26,8 +34,7 @@ class Enemy { //protivník
   }
 
   paint() { //nakreslení do canvasu
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, 50, 50);
+    ctx.drawImage(obrz[this.enimage], this.x, this.y);
   }
 }
 
@@ -110,8 +117,10 @@ let game = {
   repaint: function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "#444444";
     ctx.fillRect(1300, 0, 1500, 600); //obranné pole
+
+    ctx.drawImage(multipla, 1301, 450);
 
     this.enemies.forEach(function(obj, index) { //pohyb a vykreslení nepřátel
       obj.move();
@@ -157,6 +166,7 @@ let shotproblem = { //hnusná záplata proti střílení když držíte mezerní
 }
 
 document.body.addEventListener('keydown', function(event) { //pro ovládání (stisk)
+  event.preventDefault();
   player.keys[event.code] = true;
   shotproblem.keys[event.code] = false;
 });
