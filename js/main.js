@@ -113,8 +113,10 @@ let game = {
   },
 
   play: function() { //animace hry a zrycholání nepřátel
-    gameRunning = true;
-    requestAnimationFrame(animate);
+    if(!gameRunning && game.lifes != 0) {
+      gameRunning = true;
+      requestAnimationFrame(animate);
+    }
   },
 
   reset: function() {
@@ -176,8 +178,8 @@ let game = {
 function animate() {
   game.repaint();
   if(gameRunning) {
-    requestAnimationFrame(animate);
     enemyspeed += 0.001;
+    requestAnimationFrame(animate);
   }
 }
 
