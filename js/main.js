@@ -18,6 +18,10 @@ let checksound = document.getElementById("sound");
 let darktheme = document.getElementById("theme");
 let enemyspeed = 3 //global speed for enemies
 
+ctx.fillStyle = "black";
+ctx.font = "128px Arial";
+ctx.fillText("Press Play to start", 230, 330);
+
 class Enemy { //protivník
   x = -100;
   y = Math.floor(Math.random() * (canvas.height - 100)) + 50;
